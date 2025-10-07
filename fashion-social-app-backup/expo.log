@@ -1,0 +1,30 @@
+env: load .env
+env: export EXPO_PUBLIC_SUPABASE_URL EXPO_PUBLIC_SUPABASE_ANON_KEY EXPO_PUBLIC_OPENWEATHER_API_KEY EXPO_PUBLIC_GOOGLE_VISION_API_KEY EXPO_PUBLIC_ENABLE_AR_FEATURE EXPO_PUBLIC_ENABLE_SHOPPING
+Starting project at /home/z/my-project/fashion-social-app
+Starting Metro Bundler
+The following packages should be updated for best compatibility with the installed expo version:
+  @shopify/flash-list@2.1.0 - expected version: 2.0.2
+Your project may not work correctly until you install the expected versions of the packages.
+Waiting on http://localhost:8085
+Logs for your project will appear below.
+/home/z/my-project/fashion-social-app/node_modules/@expo/cli/build/src/utils/errors.js:130
+    throw error;
+    ^
+
+Error: ENOSPC: System limit for number of file watchers reached, watch '/home/z/my-project/fashion-social-app/node_modules/object.values/test'
+    at FSWatcher.<computed> (node:internal/fs/watchers:254:19)
+    at Object.watch (node:fs:2549:36)
+    at FallbackWatcher._watchdir (/home/z/my-project/fashion-social-app/node_modules/metro-file-map/src/watchers/FallbackWatcher.js:88:24)
+    at /home/z/my-project/fashion-social-app/node_modules/metro-file-map/src/watchers/FallbackWatcher.js:23:16
+    at Walker.<anonymous> (/home/z/my-project/fashion-social-app/node_modules/metro-file-map/src/watchers/FallbackWatcher.js:322:31)
+    at Walker.emit (node:events:519:28)
+    at /home/z/my-project/fashion-social-app/node_modules/walker/lib/walker.js:69:16
+    at FSReqCallback.oncomplete (node:fs:187:23) {
+  errno: -28,
+  syscall: 'watch',
+  code: 'ENOSPC',
+  path: '/home/z/my-project/fashion-social-app/node_modules/object.values/test',
+  filename: '/home/z/my-project/fashion-social-app/node_modules/object.values/test'
+}
+
+Node.js v22.19.0

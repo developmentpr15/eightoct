@@ -1,0 +1,44 @@
+   ▲ Next.js 15.3.5
+   - Local:        http://localhost:3000
+   - Network:      http://0.0.0.0:3000
+   - Environments: .env
+
+ ✓ Starting...
+ ✓ Ready in 1678ms
+ ○ Compiling / ...
+ ✓ Compiled / in 5.1s (787 modules)
+ HEAD / 200 in 5440ms
+ GET / 200 in 56ms
+ ✓ Compiled in 537ms (769 modules)
+ ✓ Compiled in 395ms (769 modules)
+ ✓ Compiled /_not-found in 438ms (759 modules)
+ GET / 404 in 817ms
+ GET /_next/static/css/app/layout.css?v=1759873815045 404 in 37ms
+ GET /_next/static/chunks/main-app.js?v=1759873815045 404 in 114ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 113ms
+ GET /_next/static/chunks/app/layout.js 404 in 113ms
+ GET / 200 in 67ms
+ GET / 200 in 53ms
+ GET /_next/static/css/app/layout.css?v=1759873835159 404 in 35ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 141ms
+ GET /_next/static/chunks/app/layout.js 404 in 101ms
+ GET /_next/static/chunks/main-app.js?v=1759873835159 404 in 106ms
+ GET /_next/static/chunks/app/page.js 404 in 46ms
+ GET / 200 in 51ms
+ GET /_next/static/chunks/app/layout.js 404 in 136ms
+ GET /_next/static/chunks/main-app.js?v=1759873842044 404 in 135ms
+ GET /_next/static/css/app/layout.css?v=1759873842044 404 in 134ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 55ms
+ GET /_next/static/chunks/app/page.js 404 in 34ms
+ ○ Compiling /fashion-demo ...
+ ✓ Compiled /fashion-demo in 1097ms (829 modules)
+ GET /qr-scanner 200 in 1430ms
+ GET /fashion-demo 200 in 1421ms
+ GET / 200 in 1434ms
+ GET / 200 in 39ms
+ GET /_next/static/css/app/layout.css?v=1759873850040 404 in 115ms
+ GET /_next/static/chunks/app/layout.js 404 in 86ms
+ GET /_next/static/chunks/app-pages-internals.js 404 in 85ms
+ GET /_next/static/chunks/main-app.js?v=1759873850040 404 in 85ms
+ GET /_next/static/chunks/app/page.js 404 in 34ms
+[?25h

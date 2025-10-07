@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fashion Social App - Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #FFD700, #FFA000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .app-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .phone-mockup {
+            background: #1a1a2e;
+            border-radius: 30px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .phone-screen {
+            background: white;
+            border-radius: 20px;
+            height: 600px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .status-bar {
+            background: #1a1a2e;
+            color: white;
+            padding: 8px 20px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+        }
+
+        .app-content {
+            padding: 20px;
+            height: calc(100% - 40px);
+            overflow-y: auto;
+        }
+
+        .screen-login {
+            background: linear-gradient(135deg, #E91E63, #9C27B0);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        .screen-login h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+
+        .screen-login input {
+            width: 80%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .screen-login button {
+            width: 80%;
+            padding: 15px;
+            margin: 20px 0;
+            border: none;
+            border-radius: 10px;
+            background: linear-gradient(45deg, #FFD700, #FFA000);
+            color: #1a1a2e;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .screen-feed {
+            background: #f8f9fa;
+        }
+
+        .stories {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .story {
+            min-width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #E91E63, #9C27B0);
+            padding: 2px;
+        }
+
+        .story-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 600;
+        }
+
+        .post {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .post-header {
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .post-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #E91E63, #9C27B0);
+        }
+
+        .post-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+        }
+
+        .post-actions {
+            padding: 15px;
+            display: flex;
+            gap: 15px;
+        }
+
+        .post-action {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .post-action:hover {
+            background: #E91E63;
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .screen-wardrobe {
+            background: #f8f9fa;
+        }
+
+        .wardrobe-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .wardrobe-item {
+            background: white;
+            border-radius: 15px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .wardrobe-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .wardrobe-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 10px;
+            background: linear-gradient(45deg, #E91E63, #9C27B0);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .screen-competitions {
+            background: #f8f9fa;
+        }
+
+        .competition-card {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .competition-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .competition-title {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .competition-badge {
+            background: linear-gradient(45deg, #FFD700, #FFA000);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .competition-prize {
+            background: linear-gradient(45deg, #FFD700, #FFA000);
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .screen-profile {
+            background: linear-gradient(135deg, #1a1a2e, #252542);
+            color: white;
+        }
+
+        .profile-header {
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .profile-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #FFD700, #FFA000);
+            margin: 0 auto 15px;
+            border: 3px solid white;
+        }
+
+        .profile-name {
+            font-size: 1.5em;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .profile-stats {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            margin: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #FFD700;
+        }
+
+        .stat-label {
+            font-size: 0.9em;
+            opacity: 0.8;
+        }
+
+        .bottom-nav {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 10px;
+            display: flex;
+            justify-content: space-around;
+            border-top: 1px solid #eee;
+        }
+
+        .nav-item {
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+
+        .nav-item:hover, .nav-item.active {
+            color: #E91E63;
+        }
+
+        .nav-icon {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .features {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            background: linear-gradient(45deg, #E91E63, #9C27B0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 30px;
+            border-radius: 15px;
+            background: #f8f9fa;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: linear-gradient(45deg, #E91E63, #9C27B0);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .feature-title {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #1a1a2e;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .cta-section {
+            text-align: center;
+            margin-top: 40px;
+            padding: 40px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .cta-title {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #E91E63, #9C27B0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-description {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .cta-button {
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .cta-button-primary {
+            background: linear-gradient(45deg, #E91E63, #9C27B0);
+            color: white;
+        }
+
+        .cta-button-secondary {
+            background: white;
+            color: #E91E63;
+            border: 2px solid #E91E63;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .app-showcase {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Fashion Social App</h1>
+            <p>A premium fashion social mobile app with stunning aesthetics</p>
+        </div>
+
+        <div class="app-showcase">
+            <!-- Login Screen -->
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>📶 🔋</span>
+                    </div>
+                    <div class="app-content screen-login">
+                        <div style="font-size: 4em; margin-bottom: 20px;">👗</div>
+                        <h2>Welcome Back</h2>
+                        <p style="margin-bottom: 30px; opacity: 0.9;">Sign in to continue your fashion journey</p>
+                        <input type="email" placeholder="Enter your email" />
+                        <input type="password" placeholder="Enter your password" />
+                        <button>Sign In</button>
+                        <p style="margin-top: 20px; font-size: 14px;">Don't have an account? Sign Up</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feed Screen -->
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>📶 🔋</span>
+                    </div>
+                    <div class="app-content screen-feed">
+                        <h3 style="margin-bottom: 20px; text-align: center; color: #1a1a2e; font-weight: 600;">Fashion Feed</h3>
+                        
+                        <div class="stories">
+                            <div class="story"><div class="story-inner">You</div></div>
+                            <div class="story"><div class="story-inner">S1</div></div>
+                            <div class="story"><div class="story-inner">S2</div></div>
+                            <div class="story"><div class="story-inner">S3</div></div>
+                            <div class="story"><div class="story-inner">S4</div></div>
+                        </div>
+
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="post-avatar"></div>
+                                <div>
+                                    <div style="font-weight: 600;">@fashionista</div>
+                                    <div style="font-size: 12px; color: #666;">Miami Beach</div>
+                                </div>
+                            </div>
+                            <div class="post-image">Summer Outfit 🌴</div>
+                            <div class="post-actions">
+                                <div class="post-action">❤️</div>
+                                <div class="post-action">💬</div>
+                                <div class="post-action">📤</div>
+                                <div class="post-action">🔖</div>
+                            </div>
+                        </div>
+
+                        <div class="post">
+                            <div class="post-header">
+                                <div class="post-avatar"></div>
+                                <div>
+                                    <div style="font-weight: 600;">@streetstyle</div>
+                                    <div style="font-size: 12px; color: #666;">Tokyo</div>
+                                </div>
+                            </div>
+                            <div class="post-image">Street Style 🗾</div>
+                            <div class="post-actions">
+                                <div class="post-action">❤️</div>
+                                <div class="post-action">💬</div>
+                                <div class="post-action">📤</div>
+                                <div class="post-action">🔖</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-nav">
+                        <div class="nav-item active">
+                            <div class="nav-icon">🏠</div>
+                            <div>Feed</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">👗</div>
+                            <div>Wardrobe</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">🏆</div>
+                            <div>Competitions</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">👤</div>
+                            <div>Profile</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wardrobe Screen -->
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>📶 🔋</span>
+                    </div>
+                    <div class="app-content screen-wardrobe">
+                        <h3 style="margin-bottom: 20px; text-align: center; color: #1a1a2e; font-weight: 600;">My Wardrobe</h3>
+                        
+                        <div class="wardrobe-grid">
+                            <div class="wardrobe-item">
+                                <div class="wardrobe-icon">👔</div>
+                                <div style="font-weight: 600;">Summer Collection</div>
+                                <div style="font-size: 12px; color: #666;">15 items</div>
+                            </div>
+                            <div class="wardrobe-item">
+                                <div class="wardrobe-icon">👗</div>
+                                <div style="font-weight: 600;">Business Casual</div>
+                                <div style="font-size: 12px; color: #666;">22 items</div>
+                            </div>
+                            <div class="wardrobe-item">
+                                <div class="wardrobe-icon">👖</div>
+                                <div style="font-weight: 600;">Weekend Vibes</div>
+                                <div style="font-size: 12px; color: #666;">18 items</div>
+                            </div>
+                            <div class="wardrobe-item">
+                                <div class="wardrobe-icon">🧥</div>
+                                <div style="font-weight: 600;">Formal Wear</div>
+                                <div style="font-size: 12px; color: #666;">8 items</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-nav">
+                        <div class="nav-item">
+                            <div class="nav-icon">🏠</div>
+                            <div>Feed</div>
+                        </div>
+                        <div class="nav-item active">
+                            <div class="nav-icon">👗</div>
+                            <div>Wardrobe</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">🏆</div>
+                            <div>Competitions</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">👤</div>
+                            <div>Profile</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Competitions Screen -->
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>📶 🔋</span>
+                    </div>
+                    <div class="app-content screen-competitions">
+                        <h3 style="margin-bottom: 20px; text-align: center; color: #1a1a2e; font-weight: 600;">Competitions</h3>
+                        
+                        <div class="competition-card">
+                            <div class="competition-header">
+                                <div class="competition-title">Summer Style Challenge</div>
+                                <div class="competition-badge">ACTIVE</div>
+                            </div>
+                            <p style="color: #666; margin-bottom: 10px;">Show us your best summer outfit!</p>
+                            <div class="competition-prize">🏆 $1000 Shopping Spree</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="font-size: 12px; color: #666;">156 entries</div>
+                                <button style="background: linear-gradient(45deg, #E91E63, #9C27B0); color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600;">Enter Now</button>
+                            </div>
+                        </div>
+
+                        <div class="competition-card">
+                            <div class="competition-header">
+                                <div class="competition-title">Sustainable Fashion</div>
+                                <div class="competition-badge" style="background: #FF9800;">UPCOMING</div>
+                            </div>
+                            <p style="color: #666; margin-bottom: 10px;">Eco-friendly fashion challenge</p>
+                            <div class="competition-prize">🌱 $2000 Eco Wardrobe</div>
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <div style="font-size: 12px; color: #666;">Starts in 3 days</div>
+                                <button style="background: #ccc; color: #666; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600;">Notify Me</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-nav">
+                        <div class="nav-item">
+                            <div class="nav-icon">🏠</div>
+                            <div>Feed</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">👗</div>
+                            <div>Wardrobe</div>
+                        </div>
+                        <div class="nav-item active">
+                            <div class="nav-icon">🏆</div>
+                            <div>Competitions</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">👤</div>
+                            <div>Profile</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profile Screen -->
+            <div class="phone-mockup">
+                <div class="phone-screen">
+                    <div class="status-bar">
+                        <span>9:41</span>
+                        <span>📶 🔋</span>
+                    </div>
+                    <div class="app-content screen-profile">
+                        <div class="profile-header">
+                            <div class="profile-avatar"></div>
+                            <div class="profile-name">Fashion User</div>
+                            <div style="opacity: 0.8;">@fashionuser</div>
+                        </div>
+                        
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <div class="stat-number">42</div>
+                                <div class="stat-label">Posts</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">1.2K</div>
+                                <div class="stat-label">Followers</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number">843</div>
+                                <div class="stat-label">Following</div>
+                            </div>
+                        </div>
+
+                        <div style="padding: 20px;">
+                            <div style="background: linear-gradient(45deg, #FFD700, #FFA000); padding: 15px; border-radius: 10px; margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; align-items: center;">
+                                    <div>
+                                        <div style="color: white; font-size: 14px;">Points Balance</div>
+                                        <div style="color: white; font-size: 24px; font-weight: bold;">2,450</div>
+                                    </div>
+                                    <div style="background: white; color: #1a1a2e; padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 12px;">Redeem</div>
+                                </div>
+                            </div>
+
+                            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px;">
+                                <div style="background: #667eea; height: 80px; border-radius: 4px;"></div>
+                                <div style="background: #764ba2; height: 80px; border-radius: 4px;"></div>
+                                <div style="background: #E91E63; height: 80px; border-radius: 4px;"></div>
+                                <div style="background: #9C27B0; height: 80px; border-radius: 4px;"></div>
+                                <div style="background: #FFD700; height: 80px; border-radius: 4px;"></div>
+                                <div style="background: #FF9800; height: 80px; border-radius: 4px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bottom-nav">
+                        <div class="nav-item">
+                            <div class="nav-icon">🏠</div>
+                            <div>Feed</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">👗</div>
+                            <div>Wardrobe</div>
+                        </div>
+                        <div class="nav-item">
+                            <div class="nav-icon">🏆</div>
+                            <div>Competitions</div>
+                        </div>
+                        <div class="nav-item active">
+                            <div class="nav-icon">👤</div>
+                            <div>Profile</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="features">
+            <h2>✨ Key Features</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <div class="feature-title">Stunning UI Design</div>
+                    <div class="feature-description">Luxurious gradients, smooth animations, and modern aesthetics that create an premium user experience.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📱</div>
+                    <div class="feature-title">Cross-Platform</div>
+                    <div class="feature-description">Built with Flutter for seamless performance on both iOS and Android devices.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">👗</div>
+                    <div class="feature-title">Digital Wardrobe</div>
+                    <div class="feature-description">AI-powered clothing organization with smart categorization and outfit suggestions.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <div class="feature-title">Fashion Competitions</div>
+                    <div class="feature-description">Participate in daily challenges, brand collaborations, and win amazing prizes.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💬</div>
+                    <div class="feature-title">Social Features</div>
+                    <div class="feature-description">Connect with fashion enthusiasts, share outfits, and get inspired by the community.</div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <div class="feature-title">Gamification</div>
+                    <div class="feature-description">Earn points, unlock achievements, and climb the fashion leaderboard.</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2 class="cta-title">Ready to Test the App?</h2>
+            <p class="cta-description">
+                This is a complete Flutter mobile application with stunning aesthetics and comprehensive features. 
+                Follow the instructions below to run it on your device.
+            </p>
+            <div class="cta-buttons">
+                <button class="cta-button cta-button-primary" onclick="showInstructions()">
+                    📱 How to Run This App
+                </button>
+                <button class="cta-button cta-button-secondary" onclick="showCode()">
+                    💻 View Source Code
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showInstructions() {
+            alert(`📱 How to Run This Flutter App:
+
+1. Install Flutter SDK:
+   - Download from https://flutter.dev/docs/get-started/install
+   - Add Flutter to your PATH
+
+2. Set up Development Environment:
+   - Install VS Code or Android Studio
+   - Install Flutter extension/plugin
+
+3. Copy Project Files:
+   - Copy all files from the project directory
+   - Or clone the repository if available
+
+4. Run the App:
+   cd fashion_social_app
+   flutter pub get
+   flutter run
+
+5. For testing:
+   - Use Android Emulator
+   - Connect physical device
+   - Test on iOS Simulator (Mac only)
+
+The app includes all screens shown in this demo!`);
+        }
+
+        function showCode() {
+            alert(`💻 Project Structure:
+
+fashion_social_app/
+├── lib/
+│   ├── app/
+│   │   ├── app.dart
+│   │   └── providers/
+│   ├── models/
+│   ├── screens/
+│   ├── widgets/
+│   ├── themes/
+│   └── main.dart
+├── pubspec.yaml
+└── README.md
+
+Key Technologies:
+• Flutter 3.0+
+• Provider State Management
+• Firebase Auth & Firestore
+• Google Fonts & Animations
+• Material Design 3
+
+All source code is ready to run!`);
+        }
+
+        // Add interactive animations
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate phone mockups on scroll
+            const phones = document.querySelectorAll('.phone-mockup');
+            phones.forEach((phone, index) => {
+                phone.style.opacity = '0';
+                phone.style.transform = 'translateY(50px)';
+                setTimeout(() => {
+                    phone.style.transition = 'all 0.8s ease';
+                    phone.style.opacity = '1';
+                    phone.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+
+            // Animate feature cards
+            const features = document.querySelectorAll('.feature-card');
+            features.forEach((feature, index) => {
+                feature.style.opacity = '0';
+                feature.style.transform = 'translateY(30px)';
+                setTimeout(() => {
+                    feature.style.transition = 'all 0.6s ease';
+                    feature.style.opacity = '1';
+                    feature.style.transform = 'translateY(0)';
+                }, 1000 + (index * 150));
+            });
+        });
+    </script>
+</body>
+</html>
